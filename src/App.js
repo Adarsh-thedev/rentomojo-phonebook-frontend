@@ -1,16 +1,24 @@
 import React from 'react';
+import Base from './components/Base';
 import './App.css';
 import 'tachyons';
 
 const App = () => {
   return (
-    <div className="container bg-washed-red">
-      <div className = 'row'>
-        <div className = 'col col-sm-6 offset-sm-3'>
-          <p>...</p>
-        </div>
+    <Base>
+      <div className = 'grow pa3 bg1 ma2 text-center br-pill shadow-3'>
+        Contact1
       </div>
-    </div>
+      <div className = 'grow pa3 bg1 ma2 text-center br-pill shadow-3'>
+        Contact2
+      </div>
+      <div className = 'grow pa3 bg1 ma2 text-center br-pill shadow-3'>
+        Contact3
+      </div>
+      <div className = 'grow pa3 bg1 ma2 text-center br-pill shadow-3'>
+        Contact4
+      </div>
+    </Base>
   );
 }
 
