@@ -54,6 +54,7 @@ const Contactcard = (props) => {
             if(data.error) {
                 return console.log(data.error);
             }
+            return 'Success';
         })
         .catch(err => console.log(err));
     }
@@ -73,9 +74,9 @@ const Contactcard = (props) => {
                         className = 'pa2 input-reset ba br-pill mt1 hover-bg-black hover-white w-100'
                     />
                     <button 
-                        className = 'btn btn-block mt1 dim shadow-2 bg-red white br-pill tc center'
+                        className = 'btn b btn-block mt1 dim shadow-2 bg-red white br-pill tc center'
                         onClick = {onSubmit}
-                    >Make Changes</button>
+                    >Submit</button>
                 </form>
             </div>
         );
