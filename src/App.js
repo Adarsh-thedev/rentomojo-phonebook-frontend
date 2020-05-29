@@ -31,8 +31,10 @@ class App extends React.Component{
 		const {contacts, searchfield} = this.state;
 
 		const filteredContacts = contacts.filter(contact => {
-			return contact.name.toLowerCase().includes(searchfield.toLowerCase());
-		})
+			return contact.name.toLowerCase().includes(searchfield.toLowerCase()) ||
+					contact.email.toLowerCase().includes(searchfield.toLowerCase()) ||
+					contact.phoneNumber.toString().includes(searchfield);
+		});
 
 		return(
 			<div>
