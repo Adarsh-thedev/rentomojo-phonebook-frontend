@@ -87,7 +87,7 @@ const Contactcard = (props) => {
                     className = 'alert alert-success'
                     style = {{display : success ? '' : 'none'}}
                 >
-                    Contact Updated Successfully...
+                    Operation Successfull...
                 </div>
             </div>
         );
