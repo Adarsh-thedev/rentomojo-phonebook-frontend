@@ -11,6 +11,17 @@ const Contactcard = (props) => {
 
     const {showEditForm, email, phoneNumber} = state;
 
+    const handleDelete = (event) => {
+        event.preventDefault();
+        fetch(`http://localhost:8000/api/contact/${id}`, {
+            method : 'DELETE'
+        })
+        .then(response => {
+            return response.json()
+        })
+        .catch(err => console.log(err));
+    }
+
     const handleClick = () => {
         setState({
             ...state,
@@ -73,15 +84,20 @@ const Contactcard = (props) => {
     return(
         <div className = 'container mt2'>
             <div className = 'row'>
-                <div className = 'col-sm-10 offset-sm-1 bg1 text-center br-pill shadow-3'>
+                <div className = 'col-sm-12 bg1 text-center br-pill shadow-3'>
                     <p className = 'f5'>Name : {props.name}</p>
                     <span className = 'f4 red'>&#9993;</span><p className = 'f5 dib pr2'>Email : {props.email}</p>
                     <span className = 'f4 red'>&#9742;</span><p className = 'f5 dib'>Phone : {props.phoneNumber}</p>
                     <button 
                         onClick = {handleClick}
                         title = 'Edit Contact' 
-                        className= 'ml5 bn bg1 dim f3 pointer red'
+                        className= 'ml5 b pl1 bn bg1 dim f3 pointer red'
                     >&#9998;</button>
+                    <button 
+                        onClick = {handleDelete}
+                        title = 'Delete Contact' 
+                        className= 'ml5 b dib bn bg1 dim f3 pointer red'
+                    >&#9746;</button>
                 </div>
             </div>
             <div className = 'row' id = 'editForm'>
