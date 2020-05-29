@@ -8,6 +8,7 @@ const Contacts = ({contacts}) => {
                 return (
                     <Contactcard
                         key = {contact._id}
+                        id = {contact._id}
                         name = {contact.name}
                         email = {contact.email}
                         phoneNumber = {contact.phoneNumber}
