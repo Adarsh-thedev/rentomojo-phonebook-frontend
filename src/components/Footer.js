@@ -5,10 +5,12 @@ const Footer = () => {
         showPostForm : false,
         name : '',
         email : '',
-        phoneNumber : ''
+        phoneNumber : '',
+        error : false,
+        success : false
     });
 
-    const {showPostForm, name, email, phoneNumber} = state;
+    const {showPostForm, name, email, phoneNumber, error, success} = state;
 
     const handleClick = () => {
         setState({
@@ -41,9 +43,18 @@ const Footer = () => {
         .catch(err => console.log(err))
         .then(data=> {
             if(data.error) {
-                console.log(data.error);
+                setState({...state, error : data.error})
+            } else{
+                setState({
+                    ...state,
+                    name : '',
+                    email : '',
+                    phoneNumber : '',
+                    showPostForm : false,
+                    success : true,
+                    error : false
+                })
             }
-            return 'Success'
         })
         .catch(err => console.log(err));
     }
@@ -76,6 +87,32 @@ const Footer = () => {
         );
     }
 
+    const errorMessage = () => {
+        return error && (
+            <div className="col-md-6 offset-sm-3 text-left">
+                <div 
+                    className = 'alert alert-danger'
+                    style = {{display : error ? '' : 'none'}}
+                >
+                    {error}
+                </div>
+            </div>
+        );
+    }
+
+    const successMessgage = () => {
+        return success && (
+            <div className="col-md-6 offset-sm-3 text-left">
+                <div 
+                    className = 'alert alert-success'
+                    style = {{display : success ? '' : 'none'}}
+                >
+                    Contact Saved Successfully...
+                </div>
+            </div>
+        );
+    }
+
     return(
         <div className = 'container mt2'>
             <div className = 'row'>
@@ -88,6 +125,8 @@ const Footer = () => {
                 </div>
             </div>
             <div className = 'row' id = 'postForm'>
+                {errorMessage()}
+                {successMessgage()}
                 {addContactForm()}
             </div>
         </div>

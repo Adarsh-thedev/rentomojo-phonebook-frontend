@@ -1,15 +1,15 @@
 import React,{useState} from 'react';
-//import {editcontact} from '../helper/index';
 
 const Contactcard = (props) => {
     const {id} = props;
     const [state, setState] = useState({
         showEditForm : false,
         email : '',
-        phoneNumber : ''
+        phoneNumber : '',
+        success : false
     });
 
-    const {showEditForm, email, phoneNumber} = state;
+    const {showEditForm, email, phoneNumber, success} = state;
 
     const handleDelete = (event) => {
         event.preventDefault();
@@ -18,6 +18,19 @@ const Contactcard = (props) => {
         })
         .then(response => {
             return response.json()
+        })
+        .then(data => {
+            if(data.error) {
+                console.log(data.error)
+            } else {
+                setState({
+                    ...state,
+                    showEditForm : false,
+                    email : '',
+                    phoneNumber : '',
+                    success : true
+                })
+            }
         })
         .catch(err => console.log(err));
     }
@@ -52,11 +65,32 @@ const Contactcard = (props) => {
         })
         .then(data => {
             if(data.error) {
-                return console.log(data.error);
+                setState({...state, error : data.error})
+            } else {
+                setState({
+                    ...state,
+                    showEditForm : false,
+                    email : '',
+                    phoneNumber : '',
+                    success : true,
+                    error : false
+                })
             }
-            return 'Success';
         })
         .catch(err => console.log(err));
+    }
+
+    const successMessgage = () => {
+        return success && (
+            <div className="col-md-6 offset-sm-3 text-left">
+                <div 
+                    className = 'alert alert-success'
+                    style = {{display : success ? '' : 'none'}}
+                >
+                    Contact Updated Successfully...
+                </div>
+            </div>
+        );
     }
 
     const editForm = () => {
@@ -102,6 +136,7 @@ const Contactcard = (props) => {
                 </div>
             </div>
             <div className = 'row' id = 'editForm'>
+                {successMessgage()}
                 {editForm()}
             </div>
         </div>
