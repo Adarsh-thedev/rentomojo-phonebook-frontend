@@ -11,24 +11,34 @@ class App extends React.Component{
 	constructor(props) {
 		super(props);
 		this.state = {
-			contacts : []
+			contacts : [],
+			searchfield : ''
 		}
 	}
 
 	componentDidMount() {
 		getcontacts().then(data => {
-			this.setState({contacts : data})
+			this.setState({contacts : data});
 		})
 	}
 
+	onSearchChange = (event) =>{
+		this.setState({searchfield : event.target.value});
+	}
+	
+
 	render() {
-		const {contacts} = this.state;
+		const {contacts, searchfield} = this.state;
+
+		const filteredContacts = contacts.filter(contact => {
+			return contact.name.toLowerCase().includes(searchfield.toLowerCase());
+		})
 
 		return(
 			<div>
 				<Header/>
-				<Searchbox/>
-				<Contacts contacts = {contacts}/>
+				<Searchbox searchChange = {this.onSearchChange}/>
+				<Contacts contacts = {filteredContacts}/>
 				<Footer/>
 			</div>
 		);
