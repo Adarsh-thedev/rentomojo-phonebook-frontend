@@ -7,7 +7,7 @@ const Searchbox = () => {
             <input 
                 className = 'pa3 tc ba b--transparent bg-washed-blue br-pill shadow-3'
                 type = 'search'
-                placeholder = 'Search Robots'
+                placeholder = 'Search Contacts'
             />
         </div>
     );
